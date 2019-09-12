@@ -7,30 +7,30 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/forceLockUnlockButtonID"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="315dp"
         android:layout_marginBottom="9dp"
         android:text="Force Lock/Unlock"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/setTemperatureButtonID"
+        app:layout_constraintEnd_toEndOf="@+id/setTemperatureButtonID"
+        app:layout_constraintStart_toStartOf="@+id/setTemperatureButtonID"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/setTemperatureButtonID"
         android:layout_width="153dp"
         android:layout_height="0dp"
         android:layout_marginBottom="23dp"
         android:text="Set Temperature"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/setCurfewButtonID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/forceLockUnlockButtonID" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/setCurfewButtonID"
         android:layout_width="152dp"
         android:layout_height="0dp"
         android:layout_marginBottom="29dp"
@@ -38,7 +38,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/setTemperatureButtonID" />
 
     <TextView
         android:id="@+id/textView"
