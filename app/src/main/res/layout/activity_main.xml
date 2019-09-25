@@ -8,24 +8,26 @@
 
     <Button
         android:id="@+id/forceLockUnlockButtonID"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="149dp"
+        android:layout_height="87dp"
         android:layout_marginTop="315dp"
         android:layout_marginBottom="9dp"
         android:text="Force Lock/Unlock"
         app:layout_constraintBottom_toTopOf="@+id/setTemperatureButtonID"
         app:layout_constraintEnd_toEndOf="@+id/setTemperatureButtonID"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/setTemperatureButtonID"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/setTemperatureButtonID"
-        android:layout_width="153dp"
-        android:layout_height="0dp"
+        android:layout_width="149dp"
+        android:layout_height="88dp"
         android:layout_marginBottom="23dp"
         android:text="Set Temperature"
         app:layout_constraintBottom_toTopOf="@+id/setCurfewButtonID"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forceLockUnlockButtonID" />
 
@@ -33,12 +35,12 @@
         android:id="@+id/setCurfewButtonID"
         android:layout_width="152dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="29dp"
+        android:layout_marginBottom="52dp"
         android:text="Set Curfew"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setTemperatureButtonID" />
+        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -96,4 +98,15 @@
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <Button
+        android:id="@+id/turnOnLEDButtonId"
+        android:layout_width="125dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="Turn on LED"
+        app:layout_constraintBottom_toTopOf="@+id/forceLockUnlockButtonID"
+        app:layout_constraintStart_toStartOf="@+id/forceLockUnlockButtonID" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
