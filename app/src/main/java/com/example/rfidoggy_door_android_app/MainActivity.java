@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * HC-05 bluetooth module properties.
      */
-    public final static String BLUETOOTH_MODULE_MAC_ADDRESS = "98:D3:34:90:6F:A1";
+    public final static String BLUETOOTH_MODULE_MAC_ADDRESS = "98:D3:71:FD:89:7D";
     public final static int REQUEST_ENABLE_BLUETOOTH = 1;
     private static final UUID HC05_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
