@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private Button setTempButton;
     private Button setCurfewButton;
     private Button turnOnLEDButton;
+
+    private TextView curfewTimeRangeTextView;
+    public final static int CURFEW_REQUEST_CODE = 2;
 
     /**
      * Bluetooth objects used to establish a communication between device and Arduino.
@@ -89,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        curfewTimeRangeTextView = findViewById(R.id.curfewTimeRangeTextViewId);
+
         turnOnLEDButton = findViewById(R.id.turnOnLEDButtonId);
         turnOnLEDButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,8 +147,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void openSetCurfew(){
         Intent intent = new Intent(this, SetCurfew.class);
-        startActivity(intent);
+        startActivityForResult(intent,CURFEW_REQUEST_CODE);
     }
+
+
 
     /**
      * Prompts the user to activate their devices bluetooth if it is not currently enabled.
@@ -169,6 +177,10 @@ public class MainActivity extends AppCompatActivity {
 
         if(resultCode == RESULT_OK && requestCode == REQUEST_ENABLE_BLUETOOTH){
             startBluetoothOperation();
+        }
+        else if (resultCode == RESULT_OK && requestCode == CURFEW_REQUEST_CODE){
+            String curfew = data.getStringExtra("curfewTimeRange");
+            curfewTimeRangeTextView.setText(curfew);
         }
     }
 
