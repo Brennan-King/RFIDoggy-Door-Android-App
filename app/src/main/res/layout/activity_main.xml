@@ -122,13 +122,23 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
-        android:id="@+id/curfewTimeRangeTextViewId"
-        android:layout_width="194dp"
-        android:layout_height="18dp"
+        android:id="@+id/curfewTimeTextViewId"
+        android:layout_width="152dp"
+        android:layout_height="21dp"
         android:layout_marginStart="168dp"
         android:layout_marginTop="216dp"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/currentTimeId"
+        android:layout_width="113dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="131dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

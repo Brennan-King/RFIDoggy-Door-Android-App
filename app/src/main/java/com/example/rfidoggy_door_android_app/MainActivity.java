@@ -17,7 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 /**
  * Main activity of the Android application.
@@ -31,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private Button setCurfewButton;
     private Button turnOnLEDButton;
 
-    private TextView curfewTimeRangeTextView;
+    private TextView curfewTimeTextView;
+    private TextView currentTimeTextView;
     public final static int CURFEW_REQUEST_CODE = 2;
 
     /**
@@ -93,7 +96,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        curfewTimeRangeTextView = findViewById(R.id.curfewTimeRangeTextViewId);
+        curfewTimeTextView = findViewById(R.id.curfewTimeTextViewId);
+        currentTimeTextView = findViewById(R.id.currentTimeId);
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted() ) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                long date = System.currentTimeMillis();
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+                                String dateString = simpleDateFormat.format(date);
+                                currentTimeTextView.setText(dateString);
+                            }
+                        });
+                    }
+                }
+                catch(InterruptedException e) {
+
+                }
+            }
+        };
+        thread.start();
 
         turnOnLEDButton = findViewById(R.id.turnOnLEDButtonId);
         turnOnLEDButton.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Prompts the user to activate their devices bluetooth if it is not currently enabled.
      *
@@ -179,8 +206,9 @@ public class MainActivity extends AppCompatActivity {
             startBluetoothOperation();
         }
         else if (resultCode == RESULT_OK && requestCode == CURFEW_REQUEST_CODE){
-            String curfew = data.getStringExtra("curfewTimeRange");
-            curfewTimeRangeTextView.setText(curfew);
+            Bundle bundle = data.getExtras();
+            String curfew = bundle.getString("curfewTime");
+            curfewTimeTextView.setText(curfew);
         }
     }
 

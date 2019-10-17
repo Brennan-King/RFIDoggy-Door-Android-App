@@ -19,6 +19,10 @@ public class SetCurfew extends AppCompatActivity implements TimePickerDialog.OnT
     private int curfewEndMinute;
     private Boolean curfewStartPressed = false;
     private Boolean curfewEndPressed = false;
+    private boolean curfewStartExtraSet = false;
+    private boolean curfewEndExtraSet = false;
+    private String formattedCurfewStartTime="";
+    private String formattedCurfewEndTime="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +53,16 @@ public class SetCurfew extends AppCompatActivity implements TimePickerDialog.OnT
 
     @Override
     public void onTimeSet(android.widget.TimePicker timePicker, int hourOfDay, int minute) {
+        Intent intent = new Intent(SetCurfew.this, MainActivity.class);
+
         if(curfewStartPressed) {
             TextView textViewCurfewStart = findViewById(R.id.curfewStartTextView);
             textViewCurfewStart.setText("Hour: " + hourOfDay + " Minute: " + minute);
             curfewStartHour = hourOfDay;
             curfewStartMinute = minute;
             curfewStartPressed = false;
-            Intent intent = new Intent(SetCurfew.this, MainActivity.class);
-            intent.putExtra("curfewTimeRange", formatCurfewStartTime());
-            setResult(RESULT_OK, intent);
-            //finish();
+            formattedCurfewStartTime = formatCurfewStartTime();
+            curfewStartExtraSet = true;
         }
 
         if(curfewEndPressed) {
@@ -67,7 +71,16 @@ public class SetCurfew extends AppCompatActivity implements TimePickerDialog.OnT
             curfewEndHour = hourOfDay;
             curfewEndMinute = minute;
             curfewEndPressed = false;
+            formattedCurfewEndTime = formatCurfewEndTime();
+            curfewEndExtraSet = true;
         }
+
+        if(curfewStartExtraSet && curfewEndExtraSet) {
+            intent.putExtra("curfewTime", formattedCurfewStartTime + " - " +
+                    formattedCurfewEndTime);
+            setResult(RESULT_OK, intent);
+        }
+
     }
 
     private String formatCurfewStartTime() {
@@ -91,9 +104,24 @@ public class SetCurfew extends AppCompatActivity implements TimePickerDialog.OnT
         return curfewStartHourString + ":" + curfewStartMinuteString;
     }
 
-   //public void updateMainCurfewTextView() {
-       // TextView textview = findViewById(R.id.curfewTimeRangeTextView);
-        //textview.setText(formatCurfewStartTime());
-   //}
+    private String formatCurfewEndTime() {
+        String curfewEndHourString;
+        String curfewEndMinuteString;
 
+        if(curfewEndHour < 10) {
+            curfewEndHourString = "0" + curfewEndHour;
+        }
+        else {
+            curfewEndHourString = Integer.toString(curfewEndHour);
+        }
+
+        if(curfewEndMinute < 10) {
+            curfewEndMinuteString = "0" + curfewEndMinute;
+        }
+        else {
+            curfewEndMinuteString = Integer.toString(curfewEndMinute);
+        }
+
+        return curfewEndHourString + ":" + curfewEndMinuteString;
+    }
 }
