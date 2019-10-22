@@ -19,7 +19,6 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
-import java.time.LocalDateTime;
 
 /**
  * Main activity of the Android application.
@@ -35,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView curfewTimeTextView;
     private TextView currentTimeTextView;
+    private TextView lockStatusTextView;
     public final static int CURFEW_REQUEST_CODE = 2;
+    public final static int LOCK_UNLOCK_REQUEST_CODE = 3;
 
     /**
      * Bluetooth objects used to establish a communication between device and Arduino.
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("[BLUETOOTH]", "Attempting to send data");
 
+        lockStatusTextView = findViewById(R.id.lockStatusTextViewID);
         forceLockUnlockButton = findViewById(R.id.forceLockUnlockButtonID);
         forceLockUnlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void openForceLockUnlock(){
         Intent intent = new Intent(this, ForceLockUnlock.class);
-        startActivity(intent);
+        startActivityForResult(intent, LOCK_UNLOCK_REQUEST_CODE);
     }
 
     /**
@@ -209,6 +211,11 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = data.getExtras();
             String curfew = bundle.getString("curfewTime");
             curfewTimeTextView.setText(curfew);
+        }
+        else if (resultCode == RESULT_OK && requestCode == LOCK_UNLOCK_REQUEST_CODE){
+            Bundle bundle = data.getExtras();
+            String lockStatus = bundle.getString("lockStatus");
+            lockStatusTextView.setText(lockStatus);
         }
     }
 

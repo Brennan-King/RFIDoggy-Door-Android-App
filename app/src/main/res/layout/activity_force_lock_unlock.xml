@@ -7,36 +7,38 @@
     tools:context=".ForceLockUnlock">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/lockForeverButtonID"
         android:layout_width="160dp"
-        android:layout_height="0dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="126dp"
         android:layout_marginTop="180dp"
-        android:layout_marginBottom="46dp"
+        android:layout_marginBottom="458dp"
         android:text="Lock Forever"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/unlockForeverButtonID"
         android:layout_width="160dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="50dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="319dp"
+        android:layout_marginBottom="319dp"
         android:text="Unlock Forever"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/resetButtonID"
         android:layout_width="160dp"
-        android:layout_height="0dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="462dp"
         android:layout_marginBottom="176dp"
         android:text="Reset"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
