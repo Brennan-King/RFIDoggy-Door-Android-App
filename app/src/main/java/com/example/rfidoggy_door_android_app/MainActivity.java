@@ -15,6 +15,8 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.HashMap;
+import java.util.Map;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -37,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView lockStatusTextView;
     public final static int CURFEW_REQUEST_CODE = 2;
     public final static int LOCK_UNLOCK_REQUEST_CODE = 3;
+    public final static int CURRENT_WEATHER_REQUEST_CODE = 4;
+    public final static int TEMP_REQUEST_CODE = 5;
+    public final static int MAX_TEMP_REQUEST_CODE = 6;
+    public final static int MIN_TEMP_REQUEST_CODE = 7;
+
+    private HashMap<String, String> weatherData = new HashMap<>();
+
 
     /**
      * Bluetooth objects used to establish a communication between device and Arduino.
@@ -169,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void openSetTemperature(){
         Intent intent = new Intent(this, SetTemperature.class);
-        startActivity(intent);
+        startActivityForResult(intent, TEMP_REQUEST_CODE);
     }
 
     /**
@@ -216,6 +225,11 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = data.getExtras();
             String lockStatus = bundle.getString("lockStatus");
             lockStatusTextView.setText(lockStatus);
+        }
+        else if (resultCode == RESULT_OK && requestCode == TEMP_REQUEST_CODE){
+            Bundle bundle = data.getExtras();
+            String weatherData = bundle.getSerializable("weatherData");
+            /** parse weather data
         }
     }
 
