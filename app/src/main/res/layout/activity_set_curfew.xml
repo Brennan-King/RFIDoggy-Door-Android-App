@@ -6,45 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".SetCurfew">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:text="Curfew Start"
-        app:layout_constraintEnd_toEndOf="@+id/textView12"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toTopOf="@+id/editText4" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:text="Curfew End"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText5" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="119dp"
-        android:layout_marginEnd="31dp"
-        android:ems="10"
-        android:inputType="time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="330dp"
-        android:ems="10"
-        android:inputType="time"
+    <Button
+        android:id="@+id/curfewEndButton"
+        android:layout_width="229dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="91dp"
+        android:text="Set Curfew End"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/curfewEndTextView" />
+
+    <TextView
+        android:id="@+id/curfewEndTextView"
+        android:layout_width="176dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="76dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/curfewEndButton"
+        app:layout_constraintStart_toStartOf="@+id/curfewStartButton"
+        app:layout_constraintTop_toBottomOf="@+id/curfewStartButton" />
+
+    <Button
+        android:id="@+id/curfewStartButton"
+        android:layout_width="230dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="43dp"
+        android:text="Set Curfew Start"
+        app:layout_constraintBottom_toTopOf="@+id/curfewEndTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/curfewStartTextView" />
+
+    <TextView
+        android:id="@+id/curfewStartTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginBottom="66dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/curfewStartButton"
+        app:layout_constraintEnd_toEndOf="@+id/curfewEndTextView"
+        app:layout_constraintStart_toStartOf="@+id/curfewEndTextView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
