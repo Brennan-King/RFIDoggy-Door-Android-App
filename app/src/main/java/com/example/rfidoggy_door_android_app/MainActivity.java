@@ -16,7 +16,6 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.HashMap;
-import java.util.Map;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -37,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView curfewTimeTextView;
     private TextView currentTimeTextView;
     private TextView lockStatusTextView;
+    private TextView maxTempTextView;
+    private TextView minTempTextView;
+
     public final static int CURFEW_REQUEST_CODE = 2;
     public final static int LOCK_UNLOCK_REQUEST_CODE = 3;
     public final static int CURRENT_WEATHER_REQUEST_CODE = 4;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public final static int MAX_TEMP_REQUEST_CODE = 6;
     public final static int MIN_TEMP_REQUEST_CODE = 7;
 
-    private HashMap<String, String> weatherData = new HashMap<>();
+    private HashMap<String, String> weatherData;
 
 
     /**
@@ -91,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        minTempTextView = findViewById(R.id.mintTempTextViewID);
+        maxTempTextView = findViewById(R.id.maxTempTextViewID);
         setTempButton = findViewById(R.id.setTemperatureButtonID);
         setTempButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,8 +232,9 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (resultCode == RESULT_OK && requestCode == TEMP_REQUEST_CODE){
             Bundle bundle = data.getExtras();
-            String weatherData = bundle.getSerializable("weatherData");
-            /** parse weather data
+            weatherData = (HashMap<String, String>)bundle.getSerializable("weatherData");
+            minTempTextView.setText(weatherData.get("minTemp"));
+            maxTempTextView.setText(weatherData.get("maxTemp"));
         }
     }
 

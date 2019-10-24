@@ -151,4 +151,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
+    <TextView
+        android:id="@+id/maxTempTextViewID"
+        android:layout_width="118dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="149dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mintTempTextViewID"
+        android:layout_width="117dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="181dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

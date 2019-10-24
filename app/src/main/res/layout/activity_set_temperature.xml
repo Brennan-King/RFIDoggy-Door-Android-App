@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="25dp"
-    android:background="@drawable/bg_gradient">
+    android:padding="25dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainContainer"
@@ -18,94 +18,86 @@
             android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="Rolla, MO"
             android:textSize="24dp"
-            tools:layout_editor_absoluteX="122dp"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="7dp"
             android:text="Clear Sky"
             android:textSize="18dp"
-            tools:layout_editor_absoluteX="143dp"
-            tools:layout_editor_absoluteY="67dp" />
+            app:layout_constraintEnd_toEndOf="@+id/address"
+            app:layout_constraintTop_toBottomOf="@+id/address" />
 
         <TextView
             android:id="@+id/temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
             android:fontFamily="sans-serif-thin"
             android:text="29°C"
             android:textSize="90dp"
-            tools:layout_editor_absoluteX="85dp"
-            tools:layout_editor_absoluteY="102dp" />
-
-        <TextView
-            android:id="@+id/temp_min"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Min Temp: 05:05 AM"
-            tools:layout_editor_absoluteX="203dp"
-            tools:layout_editor_absoluteY="554dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/status" />
 
         <Space
             android:id="@+id/space"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-        <TextView
-            android:id="@+id/temp_max"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Max Temp: 05:05 PM"
-            tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="554dp" />
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/setMaxTempTextBoxID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="26dp"
             android:ems="10"
             android:inputType="number"
-            tools:layout_editor_absoluteX="74dp"
-            tools:layout_editor_absoluteY="330dp" />
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="@+id/setMinTempTextBoxID" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/setMinTempTextBoxID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="216dp"
             android:ems="10"
             android:inputType="number"
-            tools:layout_editor_absoluteX="77dp"
-            tools:layout_editor_absoluteY="420dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
             android:text="Maximum Allowed Temp"
-            tools:layout_editor_absoluteX="102dp"
-            tools:layout_editor_absoluteY="311dp" />
+            app:layout_constraintBottom_toTopOf="@+id/setMaxTempTextBoxID"
+            app:layout_constraintStart_toStartOf="@+id/setMaxTempTextBoxID" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
             android:text="Minimum Allowed Temp"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="401dp" />
-
-        <CheckedTextView
-            android:id="@+id/checkedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CheckedTextView"
-            tools:layout_editor_absoluteX="121dp"
-            tools:layout_editor_absoluteY="501dp" />
+            app:layout_constraintBottom_toTopOf="@+id/setMinTempTextBoxID"
+            app:layout_constraintStart_toStartOf="@+id/setMinTempTextBoxID" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
