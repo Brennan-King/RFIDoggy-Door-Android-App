@@ -3,27 +3,23 @@ package com.example.rfidoggy_door_android_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Bundle;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-//import com.androdocs.httprequest.HttpRequest;
+import com.androdocs.httprequest.HttpRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
-public class SetTemperature extends AppCompatActivity{
+public class SetTemperature extends AppCompatActivity {
 
     String LAT = "37.9485";
     String LON = "91.7715";
@@ -31,6 +27,11 @@ public class SetTemperature extends AppCompatActivity{
 
     private EditText setMaxTempTextBox;
     private EditText setMinTempTextBox;
+
+    private TextView currentTempTextView;
+    private TextView weatherStatusTextView;
+    private String currentWeatherStatus;
+    private String currentTemp;
 
     private String userSetMaxTemp;
     private String userSetMinTemp;
@@ -42,11 +43,15 @@ public class SetTemperature extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_temperature);
 
         setMaxTempTextBox = findViewById(R.id.setMaxTempTextBoxID);
         setMinTempTextBox = findViewById(R.id.setMinTempTextBoxID);
+        currentTempTextView = findViewById(R.id.temp);
+        weatherStatusTextView = findViewById(R.id.status);
+
 
         setMinTempTextBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -89,42 +94,63 @@ public class SetTemperature extends AppCompatActivity{
                 setResult(RESULT_OK, intent);
             }
         });
+
+        new weatherTask().execute();
     }
 
-    /*
-    protected String doInBackground(String... args) {
-        String response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?lat=" + LAT + "&lon=" + LON + "&units=metric&appid=" + API);
-        return response;
-    }
+    class weatherTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
 
-    protected void onPostExecute(String result) {
-        try {
-            JSONObject jsonObj = new JSONObject(result);
-            JSONObject main = jsonObj.getJSONObject("main");
-            JSONObject weather = jsonObj.getJSONArray("weather").getJSONObject(0);
-
-            String temp = main.getString("temp") + "°C";
-            String tempMin = "Min Temp: " + main.getString("temp_min") + "°C";
-            String tempMax = "Max Temp: " + main.getString("temp_max") + "°C";
-
-            String weatherDescription = weather.getString("main");
-
-
-            *//* Populating extracted data into our views *//*
-            statusTxt.setText(weatherDescription.toUpperCase());
-            tempTxt.setText(temp);
-            temp_minTxt.setText(tempMin);
-            temp_maxTxt.setText(tempMax);
-
-            *//* Views populated, Hiding the loader, Showing the main design *//*
-            findViewById(R.id.loader).setVisibility(View.GONE);
-            findViewById(R.id.mainContainer).setVisibility(View.VISIBLE);
-
-
-        } catch (JSONException e) {
-            findViewById(R.id.loader).setVisibility(View.GONE);
-            findViewById(R.id.errorText).setVisibility(View.VISIBLE);
+            /* Showing the ProgressBar, Making the main design GONE */
+            findViewById(R.id.loader).setVisibility(View.VISIBLE);
+            findViewById(R.id.mainContainer).setVisibility(View.GONE);
+            findViewById(R.id.errorText).setVisibility(View.GONE);
         }
 
-    }*/
+        protected String doInBackground(String... args) {
+            String response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?lat=" + LAT + "&lon=" + LON + "&units=imperial&appid=" + API);
+            return response;
+        }
+
+        protected void onPostExecute(String response) {
+            try {
+                JSONObject jsonObj = new JSONObject(response);
+                JSONObject main = jsonObj.getJSONObject("main");
+                JSONObject weather = jsonObj.getJSONArray("weather").getJSONObject(0);
+
+                currentTemp = main.getString("temp") + "°F";
+
+                currentWeatherStatus = weather.getString("main");
+
+                //* Populating extracted data into our views *//*
+                weatherStatusTextView.setText(currentWeatherStatus.toUpperCase());
+                weatherAPIData.put("currentWeatherStatus",currentWeatherStatus);
+                bundle.putSerializable("weatherData", weatherAPIData);
+                intent.putExtras(bundle);
+                setResult(RESULT_OK, intent);
+
+                currentTempTextView.setText(currentTemp);
+                weatherAPIData.put("currentTemp",currentTemp);
+                bundle.putSerializable("weatherData", weatherAPIData);
+                intent.putExtras(bundle);
+                setResult(RESULT_OK, intent);
+
+                //temp_minTxt.setText(tempMin);
+                //temp_maxTxt.setText(tempMax);
+
+
+                //* Views populated, Hiding the loader, Showing the main design *//*
+                findViewById(R.id.loader).setVisibility(View.GONE);
+                findViewById(R.id.mainContainer).setVisibility(View.VISIBLE);
+
+
+            } catch (JSONException e) {
+                findViewById(R.id.loader).setVisibility(View.GONE);
+                findViewById(R.id.errorText).setVisibility(View.VISIBLE);
+            }
+
+        }
+    }
 }

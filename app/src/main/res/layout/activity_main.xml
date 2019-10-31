@@ -26,7 +26,7 @@
         android:layout_marginStart="19dp"
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="15dp"
-        android:text="Set Temperature"
+        android:text="Set Weather Preferences"
         app:layout_constraintBottom_toTopOf="@+id/setCurfewButtonID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +116,7 @@
         android:layout_height="21dp"
         android:layout_marginStart="168dp"
         android:layout_marginTop="216dp"
-        android:text=""
+        android:text="Please Set Me"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -157,7 +157,7 @@
         android:layout_height="23dp"
         android:layout_marginStart="169dp"
         android:layout_marginTop="149dp"
-        android:text=""
+        android:text="Please Set Me"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -167,8 +167,18 @@
         android:layout_height="17dp"
         android:layout_marginStart="168dp"
         android:layout_marginTop="181dp"
-        android:text=""
+        android:text="Please Set Me"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/weatherStatusTextViewID"
+        android:layout_width="148dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="72dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

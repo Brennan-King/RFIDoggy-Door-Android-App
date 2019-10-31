@@ -38,13 +38,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView lockStatusTextView;
     private TextView maxTempTextView;
     private TextView minTempTextView;
+    private TextView weatherStatusTextView;
 
     public final static int CURFEW_REQUEST_CODE = 2;
     public final static int LOCK_UNLOCK_REQUEST_CODE = 3;
-    public final static int CURRENT_WEATHER_REQUEST_CODE = 4;
-    public final static int TEMP_REQUEST_CODE = 5;
-    public final static int MAX_TEMP_REQUEST_CODE = 6;
-    public final static int MIN_TEMP_REQUEST_CODE = 7;
+    public final static int WEATHER_REQUEST_CODE = 4;
+
+    private String weatherStatus;
 
     private HashMap<String, String> weatherData;
 
@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 openSetTemperature();
             }
         });
+        weatherStatusTextView = findViewById(R.id.weatherStatusTextViewID);
 
         setCurfewButton = findViewById(R.id.setCurfewButtonID);
         setCurfewButton.setOnClickListener(new View.OnClickListener() {
@@ -182,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void openSetTemperature(){
         Intent intent = new Intent(this, SetTemperature.class);
-        startActivityForResult(intent, TEMP_REQUEST_CODE);
+        startActivityForResult(intent, WEATHER_REQUEST_CODE);
     }
 
     /**
@@ -230,11 +231,15 @@ public class MainActivity extends AppCompatActivity {
             String lockStatus = bundle.getString("lockStatus");
             lockStatusTextView.setText(lockStatus);
         }
-        else if (resultCode == RESULT_OK && requestCode == TEMP_REQUEST_CODE){
+        else if (resultCode == RESULT_OK && requestCode == WEATHER_REQUEST_CODE){
             Bundle bundle = data.getExtras();
             weatherData = (HashMap<String, String>)bundle.getSerializable("weatherData");
             minTempTextView.setText(weatherData.get("minTemp"));
             maxTempTextView.setText(weatherData.get("maxTemp"));
+
+            weatherStatus = weatherData.get("currentWeatherStatus") + "  ,  " + weatherData.get("currentTemp");
+
+            weatherStatusTextView.setText(weatherStatus);
         }
     }
 
