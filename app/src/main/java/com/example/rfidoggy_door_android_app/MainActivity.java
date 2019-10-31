@@ -40,11 +40,20 @@ public class MainActivity extends AppCompatActivity {
     private TextView minTempTextView;
     private TextView weatherStatusTextView;
 
+    private int maxTemp;
+    private int minTemp;
+    private int currentTemp;
+    private String currentTime;
+    private String timeRange;
+    private String forceLockUnlock;
+    private String currentWeatherStatus;
+    private String weatherStatus;
+
     public final static int CURFEW_REQUEST_CODE = 2;
     public final static int LOCK_UNLOCK_REQUEST_CODE = 3;
     public final static int WEATHER_REQUEST_CODE = 4;
 
-    private String weatherStatus;
+
 
     private HashMap<String, String> weatherData;
 
@@ -128,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
                                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
                                 String dateString = simpleDateFormat.format(date);
                                 currentTimeTextView.setText(dateString);
+
+                                currentTime = dateString;
                             }
                         });
                     }
@@ -225,19 +236,26 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = data.getExtras();
             String curfew = bundle.getString("curfewTime");
             curfewTimeTextView.setText(curfew);
+            timeRange = bundle.getString("curfewTime");
         }
         else if (resultCode == RESULT_OK && requestCode == LOCK_UNLOCK_REQUEST_CODE){
             Bundle bundle = data.getExtras();
             String lockStatus = bundle.getString("lockStatus");
             lockStatusTextView.setText(lockStatus);
+            forceLockUnlock = bundle.getString("lockStatus");
         }
         else if (resultCode == RESULT_OK && requestCode == WEATHER_REQUEST_CODE){
             Bundle bundle = data.getExtras();
             weatherData = (HashMap<String, String>)bundle.getSerializable("weatherData");
             minTempTextView.setText(weatherData.get("minTemp"));
             maxTempTextView.setText(weatherData.get("maxTemp"));
+            minTemp = Integer.valueOf(weatherData.get("minTemp"));
+            maxTemp = Integer.valueOf(weatherData.get("maxTemp"));
 
             weatherStatus = weatherData.get("currentWeatherStatus") + "  ,  " + weatherData.get("currentTemp");
+
+            currentTemp = Integer.valueOf(weatherData.get("currentTemp"));
+            currentWeatherStatus = weatherData.get("currentWeatherStatus");
 
             weatherStatusTextView.setText(weatherStatus);
         }
