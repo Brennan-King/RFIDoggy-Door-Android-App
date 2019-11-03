@@ -28,26 +28,32 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Buttons for the UI screen that can be used to navigate the menus.
      */
+
+    DoorLockManager manager = new DoorLockManager();
+
     private Button forceLockUnlockButton;
     private Button setTempButton;
     private Button setCurfewButton;
-    private Button turnOnLEDButton;
+    private Button uploadDataButton;
 
     private TextView curfewTimeTextView;
     private TextView currentTimeTextView;
-    private TextView lockStatusTextView;
+    private TextView forceLockStatusTextView;
     private TextView maxTempTextView;
     private TextView minTempTextView;
     private TextView weatherStatusTextView;
+    private TextView masterLockStatusTextView;
 
     private int maxTemp;
     private int minTemp;
-    private int currentTemp;
+    private float currentTemp;
     private String currentTime;
-    private String timeRange;
+    private String timeRange = "";
     private String forceLockUnlock;
     private String currentWeatherStatus;
     private String weatherStatus;
+
+    private String arduinoLockData = "";
 
     public final static int CURFEW_REQUEST_CODE = 2;
     public final static int LOCK_UNLOCK_REQUEST_CODE = 3;
@@ -93,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("[BLUETOOTH]", "Attempting to send data");
 
-        lockStatusTextView = findViewById(R.id.lockStatusTextViewID);
+        forceLockStatusTextView = findViewById(R.id.forceLockStatusTextViewID);
         forceLockUnlockButton = findViewById(R.id.forceLockUnlockButtonID);
         forceLockUnlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         curfewTimeTextView = findViewById(R.id.curfewTimeTextViewId);
         currentTimeTextView = findViewById(R.id.currentTimeId);
 
+        masterLockStatusTextView = findViewById(R.id.masterLockStatusTextViewID);
+
         Thread thread = new Thread() {
             @Override
             public void run() {
@@ -150,25 +158,15 @@ public class MainActivity extends AppCompatActivity {
         };
         thread.start();
 
-        turnOnLEDButton = findViewById(R.id.turnOnLEDButtonId);
-        turnOnLEDButton.setOnClickListener(new View.OnClickListener() {
+        uploadDataButton = findViewById(R.id.uploadDataButtonId);
+        uploadDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("[BLUETOOTH]", "Attempting to send data");
 
                 if(bluetoothSocket.isConnected() && bluetoothCommunicationThread != null) {
-                    if(!ledFlag) {
-                        String messageToSend = "ON";
-                        bluetoothCommunicationThread.
-                                writeOutCommunication(messageToSend.getBytes());
-                        ledFlag = true;
-                    }
-                    else {
-                        String messageToSend = "OFF";
-                        bluetoothCommunicationThread.
-                                writeOutCommunication(messageToSend.getBytes());
-                        ledFlag = false;
-                    }
+                    System.out.println(arduinoLockData);
+                    bluetoothCommunicationThread.writeOutCommunication(arduinoLockData.getBytes());
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Failed to connect to Arduino",
@@ -241,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
         else if (resultCode == RESULT_OK && requestCode == LOCK_UNLOCK_REQUEST_CODE){
             Bundle bundle = data.getExtras();
             String lockStatus = bundle.getString("lockStatus");
-            lockStatusTextView.setText(lockStatus);
+            forceLockStatusTextView.setText(lockStatus);
             forceLockUnlock = bundle.getString("lockStatus");
         }
         else if (resultCode == RESULT_OK && requestCode == WEATHER_REQUEST_CODE){
@@ -253,12 +251,15 @@ public class MainActivity extends AppCompatActivity {
             maxTemp = Integer.valueOf(weatherData.get("maxTemp"));
 
             weatherStatus = weatherData.get("currentWeatherStatus") + "  ,  " + weatherData.get("currentTemp");
-
-            currentTemp = Integer.valueOf(weatherData.get("currentTemp"));
+            int degreeSym = weatherData.get("currentTemp").indexOf("°");
+            currentTemp = Float.valueOf(weatherData.get("currentTemp").substring(0, degreeSym));
             currentWeatherStatus = weatherData.get("currentWeatherStatus");
 
             weatherStatusTextView.setText(weatherStatus);
         }
+
+        arduinoLockData = manager.DoorLogic(maxTemp, minTemp, currentTemp, currentTime, timeRange, forceLockUnlock, weatherStatus);
+        masterLockStatusTextView.setText(arduinoLockData);
     }
 
     /**

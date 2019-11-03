@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toTopOf="@+id/setTemperatureButtonID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/turnOnLEDButtonId" />
+        app:layout_constraintTop_toBottomOf="@+id/uploadDataButtonId" />
 
     <Button
         android:id="@+id/setTemperatureButtonID"
@@ -94,18 +94,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:text="Lock Status: "
+        android:text="Master Lock Status: "
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
-        android:id="@+id/turnOnLEDButtonId"
+        android:id="@+id/uploadDataButtonId"
         android:layout_width="125dp"
         android:layout_height="0dp"
         android:layout_marginStart="109dp"
         android:layout_marginBottom="11dp"
-        android:text="Turn on LED"
+        android:text="UPLOAD DATA"
         app:layout_constraintBottom_toTopOf="@+id/forceLockUnlockButtonID"
         app:layout_constraintStart_toStartOf="@+id/forceLockUnlockButtonID"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -116,7 +116,7 @@
         android:layout_height="21dp"
         android:layout_marginStart="168dp"
         android:layout_marginTop="216dp"
-        android:text="Please Set Me"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -131,7 +131,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/lockStatusTextViewID"
+        android:id="@+id/masterLockStatusTextViewID"
         android:layout_width="121dp"
         android:layout_height="22dp"
         android:layout_marginStart="169dp"
@@ -144,10 +144,10 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="20dp"
         android:layout_marginBottom="56dp"
         android:text="Curfew Time Range: "
-        app:layout_constraintBottom_toTopOf="@+id/turnOnLEDButtonId"
+        app:layout_constraintBottom_toTopOf="@+id/uploadDataButtonId"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -157,7 +157,7 @@
         android:layout_height="23dp"
         android:layout_marginStart="169dp"
         android:layout_marginTop="149dp"
-        android:text="Please Set Me"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -167,7 +167,7 @@
         android:layout_height="17dp"
         android:layout_marginStart="168dp"
         android:layout_marginTop="181dp"
-        android:text="Please Set Me"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -179,6 +179,26 @@
         android:layout_marginEnd="72dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/forceLockStatusTextViewID"
+        android:layout_width="153dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="248dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="133dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="248dp"
+        android:text="Force Lock Status: "
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

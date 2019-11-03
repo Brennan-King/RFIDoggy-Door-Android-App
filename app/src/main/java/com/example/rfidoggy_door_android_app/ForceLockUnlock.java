@@ -45,7 +45,7 @@ public class ForceLockUnlock extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                forceLockStatus = "CLEARED";
+                forceLockStatus = "N/A";
                 intent.putExtra("lockStatus", forceLockStatus);
                 setResult(RESULT_OK, intent);
             }

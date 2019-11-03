@@ -76,7 +76,7 @@ public class SetCurfew extends AppCompatActivity implements TimePickerDialog.OnT
         }
 
         if(curfewStartExtraSet && curfewEndExtraSet) {
-            intent.putExtra("curfewTime", formattedCurfewStartTime + " - " +
+            intent.putExtra("curfewTime", formattedCurfewStartTime + "-" +
                     formattedCurfewEndTime);
             setResult(RESULT_OK, intent);
         }
