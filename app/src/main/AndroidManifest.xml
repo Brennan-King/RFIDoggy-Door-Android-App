@@ -19,6 +19,7 @@
         <activity android:name=".ForceLockUnlock"></activity>
         <activity android:name=".SetCurfew" />
         <activity android:name=".SetTemperature" />
+        <activity android:name=".CurrentWeatherData" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

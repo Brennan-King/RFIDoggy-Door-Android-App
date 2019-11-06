@@ -22,7 +22,7 @@ import java.util.HashMap;
 public class SetTemperature extends AppCompatActivity {
 
     String LAT = "37.9485";
-    String LON = "91.7715";
+    String LON = "-91.7715";
     String API = "b94f5f54afb9c5dfe83eb82f83e35460";
 
     private EditText setMaxTempTextBox;

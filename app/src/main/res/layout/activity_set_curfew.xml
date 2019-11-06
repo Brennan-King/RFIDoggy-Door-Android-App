@@ -10,7 +10,7 @@
         android:id="@+id/curfewEndButton"
         android:layout_width="229dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="91dp"
+        android:layout_marginBottom="90dp"
         android:text="Set Curfew End"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,18 +21,18 @@
         android:id="@+id/curfewEndTextView"
         android:layout_width="176dp"
         android:layout_height="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="76dp"
-        android:text="TextView"
+        android:layout_marginBottom="43dp"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/curfewEndButton"
-        app:layout_constraintStart_toStartOf="@+id/curfewStartButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/curfewStartButton" />
 
     <Button
         android:id="@+id/curfewStartButton"
         android:layout_width="230dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="76dp"
         android:text="Set Curfew Start"
         app:layout_constraintBottom_toTopOf="@+id/curfewEndTextView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,14 +41,14 @@
 
     <TextView
         android:id="@+id/curfewStartTextView"
-        android:layout_width="0dp"
+        android:layout_width="176dp"
         android:layout_height="0dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginBottom="66dp"
-        android:text="TextView"
+        android:layout_marginTop="177dp"
+        android:layout_marginBottom="25dp"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/curfewStartButton"
-        app:layout_constraintEnd_toEndOf="@+id/curfewEndTextView"
-        app:layout_constraintStart_toStartOf="@+id/curfewEndTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
      * Buttons for the UI screen that can be used to navigate the menus.
      */
 
+    CurrentWeatherData currentWeatherData = new CurrentWeatherData();
+
     DoorLockManager manager = new DoorLockManager();
 
     private Button forceLockUnlockButton;
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private HashMap<String, String> weatherData;
-
+    private HashMap<String, String> liveWeatherData;
 
     /**
      * Bluetooth objects used to establish a communication between device and Arduino.
@@ -96,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        currentWeatherData.startAsyncExecution();
 
         Log.i("[BLUETOOTH]", "Attempting to send data");
 
@@ -132,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
         masterLockStatusTextView = findViewById(R.id.masterLockStatusTextViewID);
 
-        Thread thread = new Thread() {
+        Thread timeThread = new Thread() {
             @Override
             public void run() {
                 try {
@@ -156,7 +160,40 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-        thread.start();
+        timeThread.start();
+
+        Thread weatherThread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted() ) {
+                        Thread.sleep(5000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                int degreeSym=0;
+                                liveWeatherData = currentWeatherData.fetchCurrentWeatherData();
+
+                                weatherStatus = liveWeatherData.get("currentWeatherStatus") + "  ,  " + liveWeatherData.get("currentTemp");
+                                if(liveWeatherData.get("currentTemp") != null) {
+                                    degreeSym = liveWeatherData.get("currentTemp").indexOf("°");
+                                }
+                                if(degreeSym != 0) {
+                                    currentTemp = Float.valueOf(liveWeatherData.get("currentTemp").substring(0, degreeSym));
+                                }
+                            }
+                        });
+                    }
+                }
+                catch(InterruptedException e) {
+
+                }
+            }
+        };
+        weatherThread.start();
+
+
+
 
         uploadDataButton = findViewById(R.id.uploadDataButtonId);
         uploadDataButton.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("[BLUETOOTH]", "Attempting to send data");
 
                 if(bluetoothSocket.isConnected() && bluetoothCommunicationThread != null) {
-                    System.out.println(arduinoLockData);
+
                     bluetoothCommunicationThread.writeOutCommunication(arduinoLockData.getBytes());
                 }
                 else {
@@ -245,15 +282,13 @@ public class MainActivity extends AppCompatActivity {
         else if (resultCode == RESULT_OK && requestCode == WEATHER_REQUEST_CODE){
             Bundle bundle = data.getExtras();
             weatherData = (HashMap<String, String>)bundle.getSerializable("weatherData");
-            minTempTextView.setText(weatherData.get("minTemp"));
-            maxTempTextView.setText(weatherData.get("maxTemp"));
-            minTemp = Integer.valueOf(weatherData.get("minTemp"));
-            maxTemp = Integer.valueOf(weatherData.get("maxTemp"));
 
-            weatherStatus = weatherData.get("currentWeatherStatus") + "  ,  " + weatherData.get("currentTemp");
-            int degreeSym = weatherData.get("currentTemp").indexOf("°");
-            currentTemp = Float.valueOf(weatherData.get("currentTemp").substring(0, degreeSym));
-            currentWeatherStatus = weatherData.get("currentWeatherStatus");
+            if(weatherData.get("minTemp") != null && weatherData.get("maxTemp") != null){
+                minTempTextView.setText(weatherData.get("minTemp"));
+                maxTempTextView.setText(weatherData.get("maxTemp"));
+                minTemp = Integer.valueOf(weatherData.get("minTemp"));
+                maxTemp = Integer.valueOf(weatherData.get("maxTemp"));
+            }
 
             weatherStatusTextView.setText(weatherStatus);
         }
