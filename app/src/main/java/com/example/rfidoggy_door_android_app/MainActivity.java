@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private Button forceLockUnlockButton;
     private Button setTempButton;
     private Button setCurfewButton;
-    private Button uploadDataButton;
 
     private TextView curfewTimeTextView;
     private TextView currentTimeTextView;
@@ -151,6 +150,20 @@ public class MainActivity extends AppCompatActivity {
                                 currentTimeTextView.setText(dateString);
 
                                 currentTime = dateString;
+
+                                arduinoLockData = manager.DoorLogic(maxTemp, minTemp, currentTemp, currentTime, timeRange, forceLockUnlock, weatherStatus);
+                                masterLockStatusTextView.setText(arduinoLockData);
+
+                                //Log.i("[BLUETOOTH]", "Attempting to send data");
+
+                                if(bluetoothSocket.isConnected() && bluetoothCommunicationThread != null) {
+
+                                    bluetoothCommunicationThread.writeOutCommunication(arduinoLockData.getBytes());
+                                }
+                                else {
+                                    Toast.makeText(MainActivity.this, "Failed to connect to Arduino",
+                                            Toast.LENGTH_LONG).show();
+                                }
                             }
                         });
                     }
@@ -192,25 +205,6 @@ public class MainActivity extends AppCompatActivity {
         };
         weatherThread.start();
 
-
-
-
-        uploadDataButton = findViewById(R.id.uploadDataButtonId);
-        uploadDataButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("[BLUETOOTH]", "Attempting to send data");
-
-                if(bluetoothSocket.isConnected() && bluetoothCommunicationThread != null) {
-
-                    bluetoothCommunicationThread.writeOutCommunication(arduinoLockData.getBytes());
-                }
-                else {
-                    Toast.makeText(MainActivity.this, "Failed to connect to Arduino",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         promptUserForBluetoothActivation(bluetoothAdapter);

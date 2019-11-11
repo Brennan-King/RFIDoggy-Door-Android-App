@@ -27,7 +27,7 @@ public class DoorLockManager {
             weatherStatus = weatherStatus.substring(0, weatherStatusSpace);
         }
 
-        if (currentTemp > maxTemp || currentTemp < minTemp)
+        if ((currentTemp > maxTemp || currentTemp < minTemp) && (minTemp != maxTemp))
             lockUnlock = "L";
 
         if (weatherStatus != null) {
@@ -36,7 +36,7 @@ public class DoorLockManager {
         }
 
         if(timeMin != null && timeMax != null){
-            if (timeCurrent.isAfter(timeMin) || timeCurrent.isBefore(timeMax))
+            if (timeCurrent.isAfter(timeMin) && timeCurrent.isBefore(timeMax))
                 lockUnlock = "L";
         }
 

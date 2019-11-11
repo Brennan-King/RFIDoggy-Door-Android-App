@@ -10,40 +10,39 @@
         android:id="@+id/forceLockUnlockButtonID"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="321dp"
+        android:layout_marginEnd="1dp"
         android:text="Force Lock/Unlock"
         app:layout_constraintBottom_toTopOf="@+id/setTemperatureButtonID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uploadDataButtonId" />
-
-    <Button
-        android:id="@+id/setTemperatureButtonID"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="15dp"
-        android:text="Set Weather Preferences"
-        app:layout_constraintBottom_toTopOf="@+id/setCurfewButtonID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forceLockUnlockButtonID" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/setCurfewButtonID"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="94dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="109dp"
         android:text="Set Curfew"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setTemperatureButtonID" />
+
+    <Button
+        android:id="@+id/setTemperatureButtonID"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:text="Set Weather Preferences"
+        app:layout_constraintBottom_toTopOf="@+id/setCurfewButtonID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forceLockUnlockButtonID" />
 
     <TextView
         android:id="@+id/textView3"
@@ -99,17 +98,6 @@
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/uploadDataButtonId"
-        android:layout_width="174dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginBottom="11dp"
-        android:text="Save Preferences"
-        app:layout_constraintBottom_toTopOf="@+id/forceLockUnlockButtonID"
-        app:layout_constraintStart_toStartOf="@+id/forceLockUnlockButtonID"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
     <TextView
         android:id="@+id/curfewTimeTextViewId"
         android:layout_width="152dp"
@@ -145,9 +133,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginTop="16dp"
         android:text="Curfew Time Range: "
-        app:layout_constraintBottom_toTopOf="@+id/uploadDataButtonId"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
